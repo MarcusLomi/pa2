@@ -87,7 +87,7 @@ int main(int argc, char **argv){
     }
     printf("Here is the length of the last arg: %d\n",strlen(argv[4]));
     num1=malloc(strlen(argv[2])+1);
-    num2=malloc(strlen(argv[2])+1);
+    num2=malloc(strlen(argv[3])+1);
     //int i=0;
     //for(i=0;i<strlen(num1);i++){
         //num1[i]=0;
