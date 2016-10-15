@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1476483348 source:c:\users\marcus\desktop\comp arch\pa2\calc.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
