@@ -37,6 +37,12 @@ int numPow(int a, int b){
 }
 
 char *decimalToBin(int i){
+
+    if(i<0){
+        i-=(i*2);
+        printf("\nI IS LESS THAN 0: %d",i);
+    }
+
     printf("\nHERE DA COUNTER: ");
     char *result;
     result=(char*)malloc(200 * sizeof(char));
@@ -48,19 +54,20 @@ char *decimalToBin(int i){
         i=i/2;
         counter++;
     }
+
     result[counter]='\0';
     printf("\nHERE DA COUNTER: %d",counter);
     return result;
 
 }
 
-char* decimalToOctal(int i){
+char *decimalToOctal(int i){
     //char* result[200];
 
     return NULL;
 }
 
-char* decimalToHex(int i){
+char *decimalToHex(int i){
     //char* result[200];
 
     return NULL;
