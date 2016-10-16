@@ -47,9 +47,6 @@ char *decimalToBin(int i,int rad){
         i-=(i*2);
         printf("\nI IS LESS THAN 0: %d",i);
     }
-
-    printf("\nHERE DA COUNTER: ");
-
     result[200]='\0';
 
     while(i!=0){
@@ -66,22 +63,8 @@ char *decimalToBin(int i,int rad){
     result[counter]='\0';
     strrev(result);
 
-    //free(result);
-    printf("\nHERE DA COUNTER: %d",counter);
     return result;
 
-}
-
-char *decimalToOctal(int i){
-    //char* result[200];
-
-    return NULL;
-}
-
-char *decimalToHex(int i){
-    //char* result[200];
-
-    return NULL;
 }
 
 /*
@@ -109,8 +92,8 @@ int toDecimalConversion(char* s){
     else{
         start=1;
         base=s[0];
-
     }
+
     /*Loops for changing */
     if(base=='d'){
         for(c=start;c<end;c++){
@@ -261,7 +244,9 @@ int main(int argc, char **argv){
     }
 
     dNum1= toDecimalConversion(num1);
+    free(num1);
     dNum2= toDecimalConversion(num2);
+    free(num2);
 
     if(*argv[1]=='+'){
         decResult=add(dNum1,dNum2);
@@ -289,23 +274,26 @@ int main(int argc, char **argv){
             break;
     }
 
-
-    printf("\nHERE IT IS: %s",printout);
-    printf("\nSIZEOF: %d",strlen(printout));
-
+    printf("\nDECRES IS:%d",decResult);
     if(decResult<0){
-        char finalOut[strlen(printout)+2];
-        finalOut[0]='-';
-        finalOut[1]=*argv[4];
-        strcat(finalOut, printout);
-        printf("\n%s",finalOut);
+        //char finalOut[strlen(printout)+2];
+        //finalOut[0]='-';
+        //finalOut[1]=*argv[4];
+        //strcat(finalOut, printout);
+        printf("\nFINAL -%s%s",argv[4],printout);
     }
     else{
-        char finalOut[strlen(printout)+1];
-        finalOut[0]=*argv[4];
-        strcat(finalOut, printout);
-        printf("\n%s",finalOut);
+        //char finalOut[strlen(printout)+1];
+        //finalOut[0]=*argv[4];
+        //strcat(finalOut, printout);
+        printf("\nFINAL ans %s%s",argv[4],printout);
     }
+
+
+
+    //printf("\nSIZEOF: %d",strlen(printout));
+
+
 
 
     return 0;
