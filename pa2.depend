@@ -4,3 +4,12 @@
 	<stdlib.h>
 	<string.h>
 
+1476598834 source:c:\users\marcus\desktop\pa2\calc.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"calc.h"
+
+1476578491 c:\users\marcus\desktop\pa2\calc.h
+

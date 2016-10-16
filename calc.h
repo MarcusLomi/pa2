@@ -1,10 +1,11 @@
 #ifndef CALC_H_INCLUDED
 #define CALC_H_INCLUDED
 
-struct test_{
+struct number{
     int a;
+    char* outStr[200];
 };
 
-typedef struct test_ test;
+typedef struct number outNum;
 
 #endif // CALC_H_INCLUDED
