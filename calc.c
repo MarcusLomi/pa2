@@ -36,7 +36,12 @@ int numPow(int a, int b){
     return result;
 }
 
-char *decimalToBin(int i){
+char *decimalToBin(int i,int rad){
+    char *result;
+    char hexChar[6]={'a','b','c','d','e','f'};
+    result=(char*)malloc(200 * sizeof(char));
+    int counter=0;
+    int remain;
 
     if(i<0){
         i-=(i*2);
@@ -44,18 +49,24 @@ char *decimalToBin(int i){
     }
 
     printf("\nHERE DA COUNTER: ");
-    char *result;
-    result=(char*)malloc(200 * sizeof(char));
-    int counter=0;
+
     result[200]='\0';
 
     while(i!=0){
-        result[counter] = (i%2) + '0' ;
-        i=i/2;
+        remain=(i%rad);
+        if(remain>9){
+            result[counter] = hexChar[remain%10];
+        }
+        else{
+            result[counter] = (i%rad) + '0' ;
+        }
+        i=i/rad;
         counter++;
     }
-
     result[counter]='\0';
+    strrev(result);
+
+    //free(result);
     printf("\nHERE DA COUNTER: %d",counter);
     return result;
 
@@ -261,11 +272,40 @@ int main(int argc, char **argv){
 
     printf("\nHERE IS THE RESULT BEFORE CONVERTING: %d",decResult);
 
-    char* printout=decimalToBin(decResult);
+    char* printout;
+
+    switch(*argv[4]){
+        case 'd':
+            printout=decimalToBin(decResult,10);
+            break;
+        case 'b':
+            printout=decimalToBin(decResult,2);
+            break;
+        case 'x':
+            printout=decimalToBin(decResult,16);
+            break;
+        case 'o':
+            printout=decimalToBin(decResult,8);
+            break;
+    }
+
 
     printf("\nHERE IT IS: %s",printout);
+    printf("\nSIZEOF: %d",strlen(printout));
 
-
+    if(decResult<0){
+        char finalOut[strlen(printout)+2];
+        finalOut[0]='-';
+        finalOut[1]=*argv[4];
+        strcat(finalOut, printout);
+        printf("\n%s",finalOut);
+    }
+    else{
+        char finalOut[strlen(printout)+1];
+        finalOut[0]=*argv[4];
+        strcat(finalOut, printout);
+        printf("\n%s",finalOut);
+    }
 
 
     return 0;
