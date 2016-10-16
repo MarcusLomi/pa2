@@ -1,11 +1,10 @@
 #ifndef CALC_H_INCLUDED
 #define CALC_H_INCLUDED
 
-struct number{
-    int a;
-    char* outStr[200];
-};
-
-typedef struct number outNum;
-
+int formatCheck(char* s);
+int toDecimalConversion(char* s);
+char *decimalToOut(int i,int rad);
+int numPow(int a, int b);
+int subtract(int a, int b);
+int add(int a, int b);
 #endif // CALC_H_INCLUDED

@@ -4,12 +4,6 @@
 #include <ctype.h>
 #include "calc.h"
 
-outNum *getNum(int b){
-    outNum *r = malloc(sizeof(outNum));
-    r->a=b;
-    return r;
-}
-
 int add(int a, int b){
     int c = a+b;
     return c;
@@ -36,18 +30,21 @@ int numPow(int a, int b){
     return result;
 }
 
-char *decimalToBin(int i,int rad){
+char *decimalToOut(int i,int rad){
     char *result;
     char hexChar[6]={'a','b','c','d','e','f'};
     result=(char*)malloc(200 * sizeof(char));
     int counter=0;
     int remain;
 
+    //converts the input number to positive if it is negative, for
+    //char representation purposes
     if(i<0){
         i-=(i*2);
         printf("\nI IS LESS THAN 0: %d",i);
     }
     result[200]='\0';
+
 
     while(i!=0){
         remain=(i%rad);
@@ -94,7 +91,8 @@ int toDecimalConversion(char* s){
         base=s[0];
     }
 
-    /*Loops for changing */
+    /*Loops for changing. Traverses through string backwards and adds to the
+    decimal based on significance*/
     if(base=='d'){
         for(c=start;c<end;c++){
             result=(result * 10)+(s[c]%48);
@@ -182,7 +180,7 @@ int formatCheck(char* s){
         while(isalnum(s[c])){
             if(isalpha(s[c])){
                 if(tolower(s[c])!='a'&&tolower(s[c])!='b'&&tolower(s[c])!='c'&&tolower(s[c])!='d'&&tolower(s[c])!='e'&&tolower(s[c])!='f'){
-                   printf("\nERROR:2 Improper number format.\nLetters out of hex range <-(b|o|d|x)d,dn-1....d1,d1>");
+                   fprintf(stderr,"\nERROR:2 Improper number format.\nLetters out of hex range <-(b|o|d|x)d,dn-1....d1,d1>");
                    return 1;
                 }
             }
@@ -192,7 +190,7 @@ int formatCheck(char* s){
     else if(base=='o'){
         while(isdigit(s[c])){
             if(s[c]=='8'||s[c]=='9'){
-                printf("\nERROR:2 Improper number format.\nNumbers out of octal range <-(b|o|d|x)d,dn-1....d1,d1>");
+                fprintf(stderr,"\nERROR: Improper number format.\nNumbers out of octal range <-(b|o|d|x)d,dn-1....d1,d1>");
                 return 1;
             }
             c+=1;
@@ -209,28 +207,26 @@ int formatCheck(char* s){
 }
 
 int main(int argc, char **argv){
-    char *num1; // copy of the string value for Num 1 entered in the command line
-    char *num2; // copy of the string value for Num 2 entered in the command line
-    int dNum1;  // decimal version of the input number 1
-    int dNum2;  // decimal version of the input number 2
-    int decResult; // result of the operation done on dNum1 and dNum2
-    //char operation; //addition or subtraction operation being performed on the numbers
-    int hey = 0;
-    hey='a'%87;
-    printf("\nHere:%d",hey);
+    char *num1;     // copy of the string value for Num 1 entered in the command line
+    char *num2;     // copy of the string value for Num 2 entered in the command line
+    int dNum1;      // decimal version of the input number 1
+    int dNum2;      // decimal version of the input number 2
+    int decResult;  // result of the operation done on dNum1 and dNum2
+    char* printout; //
+
     if(argc!=5){
-        printf("\nERROR:\nYou don't have the correct number of args. \n The correct format is <op> <num1> <num2> <base>\n");
+        fprintf(stderr,"\nERROR:\nYou don't have the correct number of args. \n The correct format is <op> <num1> <num2> <base>\n");
         return 0;
     }
     if((*argv[1]!='+'&&*argv[1]!='-')||strlen(argv[1])!=1){
-        printf("ERROR: \nBad format: The first argument is not a \'+\' or a \'-\'");
+        fprintf(stderr,"ERROR: \nBad format: The first argument is not a \'+\' or a \'-\'");
         return 0;
     }
     if(strlen(argv[4])!=1){
-        printf("ERROR: \n Bad format: Length of arg for output base should be 1 letter <d/o/x/b>");
+        fprintf(stderr,"ERROR: \nBad format: Length of arg for output base should be 1 letter <d/o/x/b>");
         return 0;
     }
-    printf("Here is the length of the last arg: %d\n",strlen(argv[4]));
+
 
    /*Allocating space for strings*/
     num1=malloc(strlen(argv[2])+1);
@@ -255,46 +251,28 @@ int main(int argc, char **argv){
         decResult=subtract(dNum1,dNum2);
     }
 
-    printf("\nHERE IS THE RESULT BEFORE CONVERTING: %d",decResult);
-
-    char* printout;
-
     switch(*argv[4]){
         case 'd':
-            printout=decimalToBin(decResult,10);
+            printout=decimalToOut(decResult,10);
             break;
         case 'b':
-            printout=decimalToBin(decResult,2);
+            printout=decimalToOut(decResult,2);
             break;
         case 'x':
-            printout=decimalToBin(decResult,16);
+            printout=decimalToOut(decResult,16);
             break;
         case 'o':
-            printout=decimalToBin(decResult,8);
+            printout=decimalToOut(decResult,8);
             break;
     }
 
     printf("\nDECRES IS:%d",decResult);
     if(decResult<0){
-        //char finalOut[strlen(printout)+2];
-        //finalOut[0]='-';
-        //finalOut[1]=*argv[4];
-        //strcat(finalOut, printout);
         printf("\nFINAL -%s%s",argv[4],printout);
     }
     else{
-        //char finalOut[strlen(printout)+1];
-        //finalOut[0]=*argv[4];
-        //strcat(finalOut, printout);
-        printf("\nFINAL ans %s%s",argv[4],printout);
+        printf("\n%s%s",argv[4],printout);
     }
-
-
-
-    //printf("\nSIZEOF: %d",strlen(printout));
-
-
-
 
     return 0;
 }
