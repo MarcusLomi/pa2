@@ -1,6 +1,10 @@
 #ifndef CALC_H_INCLUDED
 #define CALC_H_INCLUDED
 
+/*
+ *@author Marcus A. Lomi
+ */
+
 int formatCheck(char* s);
 int toDecimalConversion(char* s);
 char *decimalToOut(int i,int rad);
