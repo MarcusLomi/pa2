@@ -1,8 +1,10 @@
 # depslib dependency file v1.0
-1476483348 source:c:\users\marcus\desktop\comp arch\pa2\calc.c
+1476716260 source:c:\users\marcus\desktop\comp arch\pa2\calc.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<ctype.h>
+	"calc.h"
 
 1476643037 source:c:\users\marcus\desktop\pa2\calc.c
 	<stdio.h>
@@ -18,4 +20,11 @@
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
+
+1476716304 c:\users\marcus\desktop\comp arch\pa2\calc.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"calc.h"
 

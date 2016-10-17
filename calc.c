@@ -304,7 +304,7 @@ int main(int argc, char **argv){
         printf("-%s%s",argv[4],printout);
     }
     else{
-        printf("%s%s",argv[4],printout);
+        printf("\n%s%s",argv[4],printout);
     }
 
     return 0;
