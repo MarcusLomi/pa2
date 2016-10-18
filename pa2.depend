@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1476716260 source:c:\users\marcus\desktop\comp arch\pa2\calc.c
+1476720080 source:c:\users\marcus\desktop\comp arch\pa2\calc.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -15,13 +15,13 @@
 
 1476578491 c:\users\marcus\desktop\pa2\calc.h
 
-1476656364 source:c:\users\marcus\desktop\comp arch\pa2\format.c
+1476721253 source:c:\users\marcus\desktop\comp arch\pa2\format.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 
-1476716304 c:\users\marcus\desktop\comp arch\pa2\calc.h
+1476716599 c:\users\marcus\desktop\comp arch\pa2\calc.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
