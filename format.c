@@ -60,7 +60,7 @@ int formatCheck(char* s){
     int c=0;
 
     if(strlen(s)!=32){
-        printf("\nERROR: Improper number format. \nPlease input a 32-bit binary sequence");
+        fprintf(stderr,"\nERROR: Improper number format. \nPlease input a 32-bit binary sequence");
         return 1;
     }
 
@@ -72,7 +72,7 @@ int formatCheck(char* s){
         return 0;
     }
     else{
-        printf("\nERROR: Improper number format. Invalid characters in 32-bit binary string");
+        fprintf(stderr,"\nERROR: Improper number format. Invalid characters in 32-bit binary string");
         return 1;
     }
     return 0;
