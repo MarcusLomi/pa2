@@ -3,6 +3,19 @@
 #include <string.h>
 #include <ctype.h>
 
+char *strrev(char *str){
+      char *p1, *p2;
+
+      if (! str || ! *str)
+            return str;
+      for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2){
+            *p1 ^= *p2;
+            *p2 ^= *p1;
+            *p1 ^= *p2;
+      }
+      return str;
+}
+
 int numPow(int a, int b){
 
     int result=0;
@@ -81,7 +94,6 @@ int toDecimalConversion(char* s){
     }
 
     if(s[0]=='1'){
-        printf("\nYOU HAVE A NEGATIVE \nBEFORE THE SCREW UP RESULT IS:%d",result);
         result=-2147483647+result;
     }
 
@@ -110,12 +122,26 @@ int main(int argc, char** argv){
         return 0;
     }
 
-    if(strcmp(str,"int")==0){
-        num1=toDecimalConversion(argv[1]);
-        printout=decimalToOut(num1,10);
-        printf("\n%s",printout);
-    }
+    num1=toDecimalConversion(argv[1]);
 
+    printout=decimalToOut(num1,10);
+
+    char * num=argv[1];
+
+    if(strcmp(str,"int")==0){
+        if(num[0]=='1'){
+            printf("-%s",printout);
+        }else{
+            printf("%s",printout);
+        }
+    }
+    else if(strcmp(str,"float")==0){
+        if(num[0]=='1'){
+            printf("-%s",printout);
+        }else{
+            printf("%s",printout);
+        }
+    }
 
     return 0;
 

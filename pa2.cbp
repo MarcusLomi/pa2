@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="calc.h" />
+		<Unit filename="format.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="format.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

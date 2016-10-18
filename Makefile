@@ -1,14 +1,15 @@
 FLAGS= -Wall -g 
+CC= gcc
 
 all: calc.c calc.h format.c format.h
-	gcc -Wall -g calc.c -o calc
-	gcc -Wall -g format.c -o form
+	$(CC) -Wall -g calc.c -o calc
+	$(CC) -Wall -g format.c -o format
 
 calc: calc.c calc.h
-	gcc -Wall -g calc.c -o calc
+	$(CC) -Wall -g calc.c -o calc
 
 format: format.c format.h
-	gcc -Wall -g format.c -o form
+	$(CC) -Wall -g format.c -o format
 
-clean:
-	rm format.o calc.o 
+clean: 
+	$(RM) *.o *.exe
