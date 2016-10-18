@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "format.h"
 
 char *strrev(char *str){
       char *p1, *p2;
