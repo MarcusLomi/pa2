@@ -81,7 +81,32 @@ union Number {
 };
 
 void intToDecASCII(int pow10, char *exponent ){
-    exponent[1]='2';
+    printf("\nEXPONENT: %s",exponent);
+                                //allocates memory for a result string of size 200.
+    int counter=0;              //a counter to keep track of where the ascii chars will be inserted in the array
+                                //saves the remainder of the modulo operation done on the input integer (i)
+
+    /*Makes negative input integers positive*/
+    if(pow10<0){
+        printf("\nNEGATIVE\n");
+        append(exponent,'-');
+        counter++;
+        pow10-=(pow10*2);
+    }
+
+
+    /*Adds the character value for the remainder of the modulo operation to the output string*/
+    while(pow10!=0){
+
+
+        append(exponent,(pow10%10) + '0');
+
+        pow10=pow10/10;
+        counter++;
+    }
+    exponent[counter]='\0';
+    //printf("\nFUCKING POW10: %d",pow10);
+    printf("\nEXPONENT: %s",exponent);
 }
 
 void
@@ -284,6 +309,7 @@ int toDecimalConversion(char* s){
 
 int main(int argc, char** argv){
 
+
     char* printout;
     int num1;
 
@@ -303,12 +329,42 @@ int main(int argc, char** argv){
         return 0;
     }
 
+    char * work = argv[1];
+
+    union{
+        int x;
+        float y;
+    }myU;
+
+    int k=0;
+    for(k=0;k<32;k++){
+        switch(work[k]){
+            case '0':
+                myU.x=(myU.x<<1);
+                break;
+            case'1':
+                myU.x=(myU.x<<1)+1;
+                break;
+        }
+
+    }
+    printf("\nI HOPE THIS DA NUMBER :%d\n",myU.x);
+    printf("\nHERE DA FLOAT:%f\n",myU.y);
+
+    //printf("\nDID IT WORK? :%f\n",y);
+    char * plsWork= malloc(32*sizeof(char));
+
+    floatToASCII(myU.y,plsWork);
+
+    //printf("\nDID IT WORK? :%f\n",y);
+    printf("\nHEY YALL %s",plsWork);
+
     num1=toDecimalConversion(argv[1]);
 
     printout=decimalToOut(num1,10);
 
-    char *output= malloc(200*sizeof(char));
-
+    //char *output= malloc(200*sizeof(char));
+    printf("\n AFTER THIS IS OLD CODE");
     char * num=argv[1];
 
     if(strcmp(str,"int")==0){
@@ -320,8 +376,9 @@ int main(int argc, char** argv){
     }
     else if(strcmp(str,"float")==0){
         if(num[0]=='1'){
-            floatToASCII(toDecimalConversion(argv[1]),output);
-            printf("-%s",output);
+
+            //floatToASCII(toDecimalConversion(argv[1]),output);
+            printf("-%s",printout);
         }else{
             printf("%s",printout);
         }
