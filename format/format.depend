@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1476721253 source:c:\users\marcus\desktop\comp arch\pa2\format\format.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<ctype.h>
-
