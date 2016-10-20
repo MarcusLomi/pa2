@@ -81,32 +81,34 @@ union Number {
 };
 
 void intToDecASCII(int pow10, char *exponent ){
-    printf("\nEXPONENT: %s",exponent);
-                                //allocates memory for a result string of size 200.
-    int counter=0;              //a counter to keep track of where the ascii chars will be inserted in the array
-                                //saves the remainder of the modulo operation done on the input integer (i)
+    int i;
+    for(i=0;i<10;i++){
+        exponent[i]='0';
+    }
 
+    int counter=0;
+    //printf("\nFUCKING POW10: %d\n",pow10);
     /*Makes negative input integers positive*/
     if(pow10<0){
-        printf("\nNEGATIVE\n");
-        append(exponent,'-');
+        exponent[counter]='-';
+        //append(exponent,'-');
         counter++;
         pow10-=(pow10*2);
     }
-
+    //printf("\nFUCKING POW10: %d\n",pow10);
 
     /*Adds the character value for the remainder of the modulo operation to the output string*/
     while(pow10!=0){
 
-
-        append(exponent,(pow10%10) + '0');
-
+        //append(exponent,(pow10%10) + '0');
+        exponent[counter]=(pow10%10)+'0';
+        //printf("\nAPPENDING%d\n",(pow10%10)+'0');
         pow10=pow10/10;
         counter++;
     }
     exponent[counter]='\0';
-    //printf("\nFUCKING POW10: %d",pow10);
-    printf("\nEXPONENT: %s",exponent);
+
+    //printf("\nEXPONENT: %s \n",exponent);
 }
 
 void
@@ -126,8 +128,8 @@ floatToASCII( float x, char * output )
 	biasedExp = a.i >> 23 & 0x000000ff;
 	mantissa = a.i & 0x007fffff;
 	sign = a.i >> 31;
-	printf( "BKR x is %g.  biasedExp is %x  mantissa is %08x  sign is %d\n", x,
-		biasedExp, mantissa, sign );
+	//printf( "BKR x is %g.  biasedExp is %x  mantissa is %08x  sign is %d\n", x,
+		//biasedExp, mantissa, sign );
 	if ( biasedExp == 0xff )
 	{
 		if ( mantissa == 0 )
@@ -348,23 +350,21 @@ int main(int argc, char** argv){
         }
 
     }
-    printf("\nI HOPE THIS DA NUMBER :%d\n",myU.x);
-    printf("\nHERE DA FLOAT:%f\n",myU.y);
+    //printf("\nI HOPE THIS DA NUMBER :%d\n",myU.x);
+    //printf("\nHERE DA FLOAT:%f\n",myU.y);
 
     //printf("\nDID IT WORK? :%f\n",y);
-    char * plsWork= malloc(32*sizeof(char));
+    char * floatOutPutString= malloc(32*sizeof(char));
 
-    floatToASCII(myU.y,plsWork);
 
     //printf("\nDID IT WORK? :%f\n",y);
-    printf("\nHEY YALL %s",plsWork);
+    //printf("\nHEY YALL %s",floatOutPutString);
 
     num1=toDecimalConversion(argv[1]);
 
     printout=decimalToOut(num1,10);
 
     //char *output= malloc(200*sizeof(char));
-    printf("\n AFTER THIS IS OLD CODE");
     char * num=argv[1];
 
     if(strcmp(str,"int")==0){
@@ -376,11 +376,11 @@ int main(int argc, char** argv){
     }
     else if(strcmp(str,"float")==0){
         if(num[0]=='1'){
-
-            //floatToASCII(toDecimalConversion(argv[1]),output);
-            printf("-%s",printout);
+            floatToASCII(myU.y,floatOutPutString);
+            printf("%s",floatOutPutString);
         }else{
-            printf("%s",printout);
+            floatToASCII(myU.y,floatOutPutString);
+            printf("%s",floatOutPutString);
         }
     }
 
