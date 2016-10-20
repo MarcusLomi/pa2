@@ -3,13 +3,10 @@
 #include <string.h>
 #include <ctype.h>
 #include "format.h"
-<<<<<<< HEAD
 
-=======
 /*
  *@author Marcus A. Lomi
  */
->>>>>>> 0be4e70aa7b95d52988fbdc09560b1641f62f1ac
 // Convert IEEE 32-bit floating point to printable ASCII string
 
 // input: x is the 32-bit input.

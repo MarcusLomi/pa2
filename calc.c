@@ -121,11 +121,11 @@ int toDecimalConversion(char* s){
 
     if(s[0]=='-'){
         start=2;
-        base=s[1];
+        base=tolower(s[1]);
     }
     else{
         start=1;
-        base=s[0];
+        base=tolower(s[0]);
     }
 
     /*Loops for changing the number string from any base into a decimal integer.
@@ -202,7 +202,7 @@ int formatCheck(char* s){
         printf("\nERROR:2 Improper number format. <-?(b|o|d|x)d,dn-1....d1,d1>");
         return 1;
     }
-    base=s[c-1];
+    base=tolower(s[c-1]);
     if(base=='d'){
         while(isdigit(s[c])){
            c+=1;
@@ -256,8 +256,8 @@ int main(int argc, char **argv){
         fprintf(stderr,"\nERROR:\nYou don't have the correct number of args. \n The correct format is <op> <num1> <num2> <base>\n");
         return 0;
     }
-    if((*argv[1]!='+'&&*argv[1]!='-')||strlen(argv[1])!=1){
-        fprintf(stderr,"ERROR: \nBad format: The first argument is not a \'+\' or a \'-\'");
+    if((*argv[1]!='+'&&*argv[1]!='-'&&*argv[1]!='*')||strlen(argv[1])!=1){
+        fprintf(stderr,"ERROR: \nBad format: The first argument is not a \'+\' or a \'-\' or a \'*\'");
         return 0;
     }
     if(strlen(argv[4])!=1){
@@ -287,6 +287,9 @@ int main(int argc, char **argv){
     }
     else if(*argv[1]=='-'){
         decResult=subtract(dNum1,dNum2);
+    }
+    else if(*argv[1]=='*'){
+        decResult=(dNum1*dNum2);
     }
 
     /*If the result of the operation is zero, there is no need to make any more calculations*/
