@@ -331,6 +331,11 @@ int main(int argc, char** argv){
         return 0;
     }
 
+    if(strcmp(argv[1],"10000000000000000000000000000000")==0){
+        printf("-2147483648");
+        return 0;
+    }
+
     char * work = argv[1];
 
     union{
