@@ -3,7 +3,13 @@
 #include <string.h>
 #include <ctype.h>
 #include "format.h"
+<<<<<<< HEAD
 
+=======
+/*
+ *@author Marcus A. Lomi
+ */
+>>>>>>> 0be4e70aa7b95d52988fbdc09560b1641f62f1ac
 // Convert IEEE 32-bit floating point to printable ASCII string
 
 // input: x is the 32-bit input.
@@ -55,17 +61,6 @@ get_float_digit( float x, char * digit, int * pow10, float * remainder )
 	}
 }
 
-// Improve efficiency by adding more while loops to handle larger powers of 10, e.g. :
-// while ( x >= 1e1024 ) { x /= 1e0124; pow10 += 1024; }
-// while ( x >= 1e512 ) { x /= 1e512; pow10 += 512; }
-// ...
-// while ( x >= 10.0 ) { x /= 10.0 ; pow10 += 1; }
-// And
-// while ( x < 1.0 ) { x *= 10; pow10 -= 1; }
-// ...
-// while ( x < 1e-512 ) { x *= 1e512; pow10 -= 512; }
-// while ( x < 1e-1024 ) { x *= 1e1024; pow10 -= 1024; }
-
 static void
 append( char * s, char c )
 {
@@ -82,32 +77,29 @@ union Number {
 };
 
 void intToDecASCII(int pow10, char *exponent ){
-    printf("\nEXPONENT: %s",exponent);
-                                //allocates memory for a result string of size 200.
-    int counter=0;              //a counter to keep track of where the ascii chars will be inserted in the array
-                                //saves the remainder of the modulo operation done on the input integer (i)
+    int i;
+    int counter=0;  //Keeps track of position in exponent array
+
+    for(i=0;i<10;i++){
+        exponent[i]='0';
+    }
+
+
 
     /*Makes negative input integers positive*/
     if(pow10<0){
-        printf("\nNEGATIVE\n");
-        append(exponent,'-');
+        exponent[counter]='-';
         counter++;
         pow10-=(pow10*2);
     }
 
-
     /*Adds the character value for the remainder of the modulo operation to the output string*/
     while(pow10!=0){
-
-
-        append(exponent,(pow10%10) + '0');
-
+        exponent[counter]=(pow10%10)+'0';
         pow10=pow10/10;
         counter++;
     }
     exponent[counter]='\0';
-    //printf("\nFUCKING POW10: %d",pow10);
-    printf("\nEXPONENT: %s",exponent);
 }
 
 void
@@ -127,8 +119,8 @@ floatToASCII( float x, char * output )
 	biasedExp = a.i >> 23 & 0x000000ff;
 	mantissa = a.i & 0x007fffff;
 	sign = a.i >> 31;
-	printf( "BKR x is %g.  biasedExp is %x  mantissa is %08x  sign is %d\n", x,
-		biasedExp, mantissa, sign );
+	//printf( "BKR x is %g.  biasedExp is %x  mantissa is %08x  sign is %d\n", x,
+		//biasedExp, mantissa, sign );
 	if ( biasedExp == 0xff )
 	{
 		if ( mantissa == 0 )
@@ -265,15 +257,16 @@ char *decimalToOut(int i,int rad){
 int formatCheck(char* s){
     int c=0;
 
+    /*Checks string for proper length*/
     if(strlen(s)!=32){
         fprintf(stderr,"\nERROR: Improper number format. \nPlease input a 32-bit binary sequence");
         return 1;
     }
 
+    /*While if else block handles strings with digits other than 1 and 0*/
     while(s[c]=='0'||s[c]=='1'){
         c+=1;
     }
-
     if(s[c]=='\0'){
         return 0;
     }
@@ -310,16 +303,18 @@ int toDecimalConversion(char* s){
 
 int main(int argc, char** argv){
 
+    char* printout; //The string representation of the binary input when the format argument is int
+    char * floatOutPutString= malloc(32*sizeof(char));
+    int num1;       //Saves the decimal version of the binary input argument for an integer output
+    int i; //used for counter
 
-    char* printout;
-    int num1;
-
+    /*General format checking*/
     if(argc!=3){
         fprintf(stderr,"\nERROR:\nYou don't have the correct number of args.\nThe correct format is <input sequence> <type>\n");
         return 0;
     }
     char* str=argv[2];
-    for(int i = 0; str[i]; i++){
+    for( i = 0; str[i]; i++){
         str[i] = tolower(str[i]);
     }
     if(strcmp(str,"int")!=0&&strcmp(str,"float")!=0){
@@ -330,16 +325,21 @@ int main(int argc, char** argv){
         return 0;
     }
 
-    char * work = argv[1];
+    /*Handles the minimum value for int so there is no underflow*/
+    if(strcmp(argv[1],"10000000000000000000000000000000")==0&&strcmp(str,"int")==0){
+        printf("-2147483648");
+        return 0;
+    }
 
+    /*Takes string and builds the int from it in a union. This is used for float*/
+    char * binStr = argv[1];
     union{
         int x;
         float y;
     }myU;
-
     int k=0;
     for(k=0;k<32;k++){
-        switch(work[k]){
+        switch(binStr[k]){
             case '0':
                 myU.x=(myU.x<<1);
                 break;
@@ -349,25 +349,11 @@ int main(int argc, char** argv){
         }
 
     }
-    printf("\nI HOPE THIS DA NUMBER :%d\n",myU.x);
-    printf("\nHERE DA FLOAT:%f\n",myU.y);
-
-    //printf("\nDID IT WORK? :%f\n",y);
-    char * plsWork= malloc(32*sizeof(char));
-
-    floatToASCII(myU.y,plsWork);
-
-    //printf("\nDID IT WORK? :%f\n",y);
-    printf("\nHEY YALL %s",plsWork);
 
     num1=toDecimalConversion(argv[1]);
-
     printout=decimalToOut(num1,10);
 
-    //char *output= malloc(200*sizeof(char));
-    printf("\n AFTER THIS IS OLD CODE");
     char * num=argv[1];
-
     if(strcmp(str,"int")==0){
         if(num[0]=='1'){
             printf("-%s",printout);
@@ -376,13 +362,8 @@ int main(int argc, char** argv){
         }
     }
     else if(strcmp(str,"float")==0){
-        if(num[0]=='1'){
-
-            //floatToASCII(toDecimalConversion(argv[1]),output);
-            printf("-%s",printout);
-        }else{
-            printf("%s",printout);
-        }
+        floatToASCII(myU.y,floatOutPutString);
+        printf("%s",floatOutPutString);
     }
 
     return 0;

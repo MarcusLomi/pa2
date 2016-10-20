@@ -1,6 +1,0 @@
-#ifndef FORMAT_H_INCLUDED
-#define FORMAT_H_INCLUDED
-
-
-
-#endif // FORMAT_H_INCLUDED
