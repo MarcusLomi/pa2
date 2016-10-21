@@ -74,14 +74,12 @@ union Number {
 };
 
 void intToDecASCII(int pow10, char *exponent ){
-    int i;
+    int i;          //Used to initialize array
     int counter=0;  //Keeps track of position in exponent array
 
     for(i=0;i<10;i++){
         exponent[i]='0';
     }
-
-
 
     /*Makes negative input integers positive*/
     if(pow10<0){

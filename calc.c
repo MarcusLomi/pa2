@@ -275,7 +275,6 @@ int main(int argc, char **argv){
     dNum1= toDecimalConversion(argv[2]);
     dNum2= toDecimalConversion(argv[3]);
 
-
     if(*argv[1]=='+'){
         decResult=add(dNum1,dNum2);
     }
