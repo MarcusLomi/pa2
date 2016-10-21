@@ -66,6 +66,9 @@ int numPow(int a, int b){
  * If the number is negative, for ease of use, the algorithm makes the integer positive
  * before generating the ascii characters to put into the string so that the algorithm remains
  * simple.
+ *
+ *int i: Decimal integer to be converted
+ *int rad: radix of the intended output string
  */
 
 char *decimalToOut(int i,int rad){
@@ -244,8 +247,6 @@ int formatCheck(char* s){
 }
 
 int main(int argc, char **argv){
-    char *num1;     // copy of the string value for Num 1 entered in the command line
-    char *num2;     // copy of the string value for Num 2 entered in the command line
     int dNum1;      // decimal version of the input number 1
     int dNum2;      // decimal version of the input number 2
     int decResult;  // result of the operation done on dNum1 and dNum2
@@ -265,22 +266,17 @@ int main(int argc, char **argv){
         return 0;
     }
 
-   /*Allocating space for string copies of argv[2] and argv[3]*/
-    num1=malloc(strlen(argv[2])+1);
-    num2=malloc(strlen(argv[3])+1);
-    strcpy(num1,argv[2]);
-    strcpy(num2,argv[3]);
+
 
     /*Checking for formatting errors in number inputs*/
-    if(formatCheck(num1)==1||formatCheck(num2)==1){
+    if(formatCheck(argv[2])==1||formatCheck(argv[3])==1){
         return 0;
     }
 
     /*Takes the strings num1 and num2 and generates decimal integers from them*/
-    dNum1= toDecimalConversion(num1);
-    free(num1);
-    dNum2= toDecimalConversion(num2);
-    free(num2);
+    dNum1= toDecimalConversion(argv[2]);
+    dNum2= toDecimalConversion(argv[3]);
+
 
     if(*argv[1]=='+'){
         decResult=add(dNum1,dNum2);

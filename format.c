@@ -198,6 +198,8 @@ floatToASCII( float x, char * output )
 	strcat( output, exponent );
 }
 
+
+/*Reverses input string and returns the output*/
 char *strrev(char *str){
       char *p1, *p2;
 
@@ -210,6 +212,10 @@ char *strrev(char *str){
       }
       return str;
 }
+
+/*
+ *numPow raises int a to power b
+ */
 
 int numPow(int a, int b){
 
@@ -226,6 +232,14 @@ int numPow(int a, int b){
 
     return result;
 }
+/*
+ *decimalToOut converts the decimal int and returns a string of the correct value and output base.
+ *
+ *int i: the decimal input
+ *int rad: radix of the base for the string output
+ */
+
+
 char *decimalToOut(int i,int rad){
     char *result;
     result=(char*)malloc(200 * sizeof(char));   //allocates memory for a result string of size 200.
@@ -303,7 +317,7 @@ int main(int argc, char** argv){
     char* printout; //The string representation of the binary input when the format argument is int
     char * floatOutPutString= malloc(32*sizeof(char));
     int num1;       //Saves the decimal version of the binary input argument for an integer output
-    int i; //used for counter
+    int i;          //used for counter
 
     /*General format checking*/
     if(argc!=3){
@@ -330,10 +344,12 @@ int main(int argc, char** argv){
 
     /*Takes string and builds the int from it in a union. This is used for float*/
     char * binStr = argv[1];
+
     union{
         int x;
         float y;
     }myU;
+
     int k=0;
     for(k=0;k<32;k++){
         switch(binStr[k]){
