@@ -266,8 +266,6 @@ int main(int argc, char **argv){
         return 0;
     }
 
-
-
     /*Checking for formatting errors in number inputs*/
     if(formatCheck(argv[2])==1||formatCheck(argv[3])==1){
         return 0;
