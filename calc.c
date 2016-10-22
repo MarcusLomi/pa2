@@ -195,13 +195,13 @@ int formatCheck(char* s){
         return 1;
     }
     else if(s[0]=='-'){
-        if(s[1]!='d'&&s[1]!='b'&&s[1]!='o'&&s[1]!='x'){
+        if(tolower(s[1])!='d'&&tolower(s[1])!='b'&&tolower(s[1])!='o'&&tolower(s[1])!='x'){
             printf("\nERROR:1 Improper number format. <-?(b|o|d|x)d,dn-1....d1,d1>");
             return 1;
         }
         c+=1;
     }
-    else if(s[0]!='d'&&s[0]!='b'&&s[0]!='o'&&s[0]!='x'){
+    else if(tolower(s[0])!='d'&&tolower(s[0])!='b'&&tolower(s[0])!='o'&&tolower(s[0])!='x'){
         printf("\nERROR:2 Improper number format. <-?(b|o|d|x)d,dn-1....d1,d1>");
         return 1;
     }
@@ -292,7 +292,7 @@ int main(int argc, char **argv){
     }
 
     /*Switcher for generating a proper string dependent on the output base <d/o/b/x>*/
-    switch(*argv[4]){
+    switch(tolower(*argv[4])){
         case 'd':
             printout=decimalToOut(decResult,10);
             break;
